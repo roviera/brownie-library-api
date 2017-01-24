@@ -5,11 +5,11 @@ default: &default
 
 development:
  <<: *default
- database: cbcv_api_database
+ database: brownie_api_database
 
 test:
  <<: *default
- database: cbcv_test_database
+ database: brownie_test_database
 
 production:
   url: <%= ENV['DATABASE_URL'] %>
