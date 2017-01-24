@@ -6,7 +6,7 @@ gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 
 gem 'carrierwave', '~> 0.11.2'
 gem 'delayed_job_active_record', '~> 4.1.1'
-gem 'activeadmin', '~> 1.0.0.pre4'
+gem 'activeadmin', github: 'activeadmin'
 gem 'devise', '~> 4.2.0'
 gem 'devise_token_auth', '~> 0.1.39'
 gem 'draper', '~> 3.0.0.pre'
