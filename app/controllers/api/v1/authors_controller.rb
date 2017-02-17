@@ -1,6 +1,6 @@
 module Api
   module V1
-    class AuthorController < Api::V1::AuthorController
+    class AuthorsController < Api::V1::ApiController
       before_action :set_author, only: [:show]
 
       def show
@@ -42,7 +42,7 @@ module Api
       end
 
       def author_params
-        params.require(:book).permit(:first_name, :last_name)
+        params.require(:author).permit(:first_name, :last_name)
       end
     end
   end
