@@ -1,7 +1,7 @@
 module Api
   module V1
     class BooksController < Api::V1::ApiController
-      before_action :set_book, only: [:show]
+      before_action :set_book, only: [:show, :destroy, :update]
 
       def show
       end
@@ -21,7 +21,6 @@ module Api
       end
 
       def update
-        @book = Book.find(params[:id])
         if @book.update(book_params)
           render json: @book.as_json(only: [:id]), status: :ok
         else
@@ -30,7 +29,6 @@ module Api
       end
 
       def destroy
-        @book = Book.find(params[:id])
         @book.destroy
         head :no_content
       end
