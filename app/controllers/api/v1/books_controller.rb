@@ -6,6 +6,11 @@ module Api
       def show
       end
 
+      def index
+        @books = Book.all
+        render json: @books.as_json(only: [:id])
+      end
+
       def create
       	@book = Book.new(book_params)
       	if @book.save
@@ -13,6 +18,21 @@ module Api
         else
           render json: { error: @book.errors.as_json }, status: :unprocessable_entity
         end
+      end
+
+      def update
+        @book = Book.find(params[:id])
+        if @book.update(book_params)
+          render json: @book.as_json(only: [:id]), status: :ok
+        else
+          render json: { error: @book.errors.as_json }, status: :bad_request
+        end
+      end
+
+      def destroy
+        @book = Book.find(params[:id])
+        @book.destroy
+        head :no_content
       end
 
       private
