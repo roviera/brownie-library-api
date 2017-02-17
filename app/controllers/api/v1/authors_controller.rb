@@ -1,7 +1,7 @@
 module Api
   module V1
     class AuthorsController < Api::V1::ApiController
-      before_action :set_author, only: [:show]
+      before_action :set_author, only: [:show, :update, :destroy]
 
       def show
       end
@@ -21,7 +21,6 @@ module Api
       end
 
       def update
-        @author = Author.find(params[:id])
         if @author.update(author_params)
           render json: @author.as_json(only: [:id]), status: :ok
         else
@@ -30,7 +29,6 @@ module Api
       end
 
       def destroy
-        @author = Author.find(params[:id])
         @author.destroy
         head :no_content
       end
