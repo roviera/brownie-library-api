@@ -1,7 +1,7 @@
 module Api
   module V1
     class CommentsController < Api::V1::ApiController
-      before_action :set_comment, only: [:destroy]
+      before_action :set_comment, only: [:destroy, :update]
 
       def index
         @comments = Comment.all
@@ -16,6 +16,14 @@ module Api
           render json: @comment.as_json(only: [:id]), status: :created
         else
           render json: { error: @comment.errors.as_json }, status: :unprocessable_entity
+        end
+      end
+
+      def update
+        if @comment.update(comment_params)
+          render json: @comment.as_json(only: [:id]), status: :ok
+        else
+          render json: { error: @comment.errors.as_json }, status: :bad_request
         end
       end
 
