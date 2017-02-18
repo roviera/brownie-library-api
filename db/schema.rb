@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170217044733) do
+ActiveRecord::Schema.define(version: 20170217201036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,12 +49,12 @@ ActiveRecord::Schema.define(version: 20170217044733) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "text"
-    t.integer  "book_id"
-    t.integer  "user_id"
+    t.integer  "book_id",    null: false
+    t.integer  "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_comments_on_author_id", using: :btree
     t.index ["book_id"], name: "index_comments_on_book_id", using: :btree
-    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -97,5 +97,5 @@ ActiveRecord::Schema.define(version: 20170217044733) do
   end
 
   add_foreign_key "comments", "books"
-  add_foreign_key "comments", "users"
+  add_foreign_key "comments", "users", column: "author_id"
 end
