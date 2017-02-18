@@ -28,6 +28,10 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :users do
+        resources :requests
+      end
+
     end
   end
 end
