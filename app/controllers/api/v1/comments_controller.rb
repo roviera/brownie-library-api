@@ -5,15 +5,15 @@ module Api
 
       def index
         @comments = Comment.all
-        render json: @acomments.as_json(only: [:id])
+        render json: @comments.as_json(only: [:id])
       end
 
       def create
         @comment = Comment.new(comment_params)
-        @comment.book = book
-        @comment.user = current_user
+        @comment.book = set_book
+        @comment.author = set_author
         if @comment.save
-          render json: @comment.as_json(only: [:id]), status: :created, notice: 'Comment created successfully'
+          render json: @comment.as_json(only: [:id]), status: :created
         else
           render json: { error: @comment.errors.as_json }, status: :unprocessable_entity
         end
@@ -32,6 +32,10 @@ module Api
 
       def set_book
         @book = Book.find(params[:book_id])
+      end
+
+      def set_author
+        @author = Author.find(params[:author_id])
       end
 
       def comment_params

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1, defaults: { format: :json } do
+      
       devise_scope :user do
         get :status, to: 'api#status'
         resources :users, only: [:show, :update] do
@@ -17,8 +18,16 @@ Rails.application.routes.draw do
           end
         end
       end
+
       resources :books, only: [:create, :update, :destroy, :show, :index]
       resources :authors, only: [:create, :update, :destroy, :show, :index]
+      
+      resources :authors do
+        resources :books do
+          resources :comments
+        end
+      end
+
     end
   end
 end
