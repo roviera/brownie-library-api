@@ -19,8 +19,8 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :books, only: [:create, :update, :destroy, :show, :index]
-      resources :authors, only: [:create, :update, :destroy, :show, :index]
+      resources :books
+      resources :authors
       
       resources :authors do
         resources :books do

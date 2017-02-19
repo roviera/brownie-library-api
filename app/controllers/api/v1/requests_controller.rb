@@ -2,12 +2,17 @@ module Api
   module V1
     class RequestsController < Api::V1::ApiController
       before_action :set_request, only: [:destroy, :update]
+      before_action :requests, only: [:index]
+
+      def index
+        render json: @requests.as_json(only: [:id])
+      end
 
       def create
         @request = Request.new
         @request.book = set_book
-        @request.user = set_user
-        @request.status = 2 # 2 = pending
+        @request.user = current_user
+        @request.status = 2
         if @request.save
           render json: @request.as_json(only: [:id]), status: :created
         else
@@ -34,12 +39,12 @@ module Api
         @request = Request.find(params[:id])
       end
 
-      def set_book
-        @book = Book.find(params[:book_id])
+      def requests
+        @requests = Request.where(user_id: params[:user_id])
       end
 
-      def set_user
-        @user = User.find(params[:user_id])
+      def set_book
+        @book = Book.find(params[:book_id])
       end
 
       def request_params
