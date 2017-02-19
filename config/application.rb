@@ -24,8 +24,6 @@ module App
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    config.assets.initialize_on_precompile = false
-
     config.secret_key_base = ENV['SECRET_KEY_BASE']
 
     config.autoload_paths += %W(#{config.root}/lib)
