@@ -16,8 +16,8 @@
 #
 
 class Request < ApplicationRecord
-  belongs_to :user
-  belongs_to :book
+  #belongs_to :user
+  #belongs_to :book
 
   enum status: [:denied, :approved, :pending]
 

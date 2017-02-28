@@ -22,11 +22,16 @@ Rails.application.routes.draw do
       resources :books
       resources :authors
       
+      resources :users
+      
+
       resources :authors do
         resources :books do
           resources :comments
         end
       end
+
+
 
       resources :users do
         resources :requests
