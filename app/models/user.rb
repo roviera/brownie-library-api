@@ -31,6 +31,8 @@
 
 class User < ApplicationRecord
   has_many :requests, dependent: :destroy
+  has_many :comments
+  has_many :books, through: :requests
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
